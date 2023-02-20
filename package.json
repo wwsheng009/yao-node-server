@@ -1,0 +1,46 @@
+{
+  "name": "yao-node-template",
+  "version": "1.0.0",
+  "description": "template project for yao-node-client/typescript development",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' -r tsconfig-paths/register src/app/scripts/myscript.ts",
+    "run": "pnpm run build  && ts-node -r tsconfig-paths/register src/app/scripts/myscript.ts",
+    "build": "tsc && tsc-alias",
+    "build:watch": "concurrently --kill-others \"tsc -w\" \"tsc-alias -w\"",
+    "yao:build": "rimraf dist_esm && tsc -p ./tsconfig-yao.json && tsc-alias -p ./tsconfig-yao.json",
+    "yao:rollup": "rimraf yao && rollup -c rollup.config.mjs",
+    "yao:fixed": "ts-node -r tsconfig-paths/register src/tools/clean_up.ts",
+    "yao:pack": "pnpm run yao:rollup && pnpm run yao:fixed"
+  },
+  "keywords": [
+    "yao",
+    "yao-engine",
+    "lowcode'"
+  ],
+  "author": "vincentwwsheng@gmail.com",
+  "license": "mit",
+  "devDependencies": {
+    "@rollup/plugin-alias": "^4.0.3",
+    "@rollup/plugin-commonjs": "^24.0.1",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@types/node": "^18.14.0",
+    "concurrently": "^7.6.0",
+    "deepmerge": "^4.3.0",
+    "glob": "^8.1.0",
+    "nodemon": "^2.0.20",
+    "rimraf": "^4.1.2",
+    "rollup": "^3.17.2",
+    "ts-node": "^10.9.1",
+    "tsc-alias": "^1.8.2",
+    "tsconfig-paths": "^4.1.2",
+    "typescript": "^4.9.5",
+    "dotenv": "^16.0.3"
+  },
+  "dependencies": {
+    "yao-node-client": "^1.0.0"
+  }
+}
