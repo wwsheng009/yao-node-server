@@ -12,7 +12,8 @@
     "yao:build": "rimraf dist_esm && tsc -p ./tsconfig-yao.json && tsc-alias -p ./tsconfig-yao.json",
     "yao:rollup": "rimraf yao && rollup -c rollup.config.mjs",
     "yao:fixed": "ts-node -r tsconfig-paths/register src/tools/clean_up.ts",
-    "yao:pack": "pnpm run yao:rollup && pnpm run yao:fixed"
+    "yao:pack": "pnpm run yao:rollup && pnpm run yao:fixed",
+    "start": "ts-node -r tsconfig-paths/register src/app/scripts/test/index.ts"
   },
   "keywords": [
     "yao",
@@ -30,6 +31,7 @@
     "@types/node": "^18.14.0",
     "concurrently": "^7.6.0",
     "deepmerge": "^4.3.0",
+    "dotenv": "^16.0.3",
     "glob": "^8.1.0",
     "nodemon": "^2.0.20",
     "rimraf": "^4.1.2",
@@ -37,10 +39,9 @@
     "ts-node": "^10.9.1",
     "tsc-alias": "^1.8.2",
     "tsconfig-paths": "^4.1.2",
-    "typescript": "^4.9.5",
-    "dotenv": "^16.0.3"
+    "typescript": "^4.9.5"
   },
   "dependencies": {
-    "yao-node-client": "^1.0.0"
+    "yao-node-client": "workspace:^1.0.0"
   }
 }
