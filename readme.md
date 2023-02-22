@@ -25,7 +25,7 @@ DEBUG=express:*
 
 - 支持$query,$form,$payload
 - 支持:query-param,:params,转换成 sql 查询参数比较复杂
-- 文件上传，需要使用 form-data 的方式上传。使用的插件是 express-fileupload。api 配置文件使用$file.name 的方式获取。 html 上需要使用`<input name="foo" type="file" />`。postname 需要使用 form-data 的方式上传，而不是 raw 的方式。
+- 文件上传，需要使用 multipart/form-data 的方式上传。使用的插件是 express-fileupload。api 配置文件使用$file.name 的方式获取。 html 上需要使用`<input name="foo" type="file" />`。postname 需要使用 multipart/form-data 的方式上传，而不是 raw 的方式。
 
 - 不支持$session
 - 不支持 api 配置文件中返回使用 bind 的语法。

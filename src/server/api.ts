@@ -279,12 +279,12 @@ const getHandlers: { [key: string]: (c: Context, name: string) => any } = {
   // 	return null;
   // },
   $file: (c: Context, name: string): any => {
-    if (!c.req.files || !name) {
-      throw Error(`文件不存在 ${name}`);
+    if (!c.req.files) {
+      return c.res.status(500).send("No files were uploaded.");
     }
-    let file1 = c.req.files[name] as UploadedFile;
-    if (!file1) {
-      throw Error(`文件不存在 ${name}`);
+    let file_upload = c.req.files[name] as UploadedFile;
+    if (!file_upload) {
+      return c.res.status(500).send(`No files were found for ${name}.`);
     }
     // 	let file;
     // 	try {
@@ -292,34 +292,33 @@ const getHandlers: { [key: string]: (c: Context, name: string) => any } = {
     // 	} catch (err) {
     // 		throw exception.New("Can't read upload file %s", 500, err);
     // 	}
-    const ext = path.extname(file1.name);
+    let fname = file_upload.name;
+    // const ext = path.extname(fname);
     let dir;
     try {
-      dir = fs.mkdtempSync(path.join(os.tmpdir(), "upload-*"));
+      dir = fs.mkdtempSync(path.join(os.tmpdir(), `upload-`));
       // dir = ioutil.TempDir(os.TempDir(), "upload");
     } catch (err) {
-      c.res.status(500);
-      throw Error(`Can't create temp dir ${err}`);
+      return c.res.status(500).send(`Can't create temp dir ${err}`);
     }
     let tmpfile;
     try {
-      tmpfile = path.join(dir, `${name}${ext}`);
+      tmpfile = path.join(dir, fname);
     } catch (err) {
-      c.res.status(500);
-      throw Error(`Can't create temp file ${err}`);
+      return c.res.status(500).send(`Can't create temp file ${err}`);
     }
     try {
       const f1 = fs.openSync(tmpfile, "w");
-      fs.writeFileSync(f1, file1.data);
+      fs.writeFileSync(f1, file_upload.data);
       fs.closeSync(f1);
     } catch (err) {
       c.res.status(500);
-      throw Error(`Can't save temp file ${err}`);
+      return c.res.status(500).send(`Can't save temp file ${err}`);
     }
     return {
-      Name: name,
+      Name: fname,
       TempFile: tmpfile,
-      Size: file1.size,
+      Size: file_upload.size,
       Header: c.req.header,
     };
   },
