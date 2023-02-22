@@ -1,4 +1,4 @@
-import { Process } from "@/yao-node-client";
+import { Process } from "yao-node-client";
 import { Add } from "./part1";
 import { Sub } from "./part2";
 

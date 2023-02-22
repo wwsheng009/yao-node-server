@@ -1,4 +1,4 @@
-import { Process } from "@/yao-node-client";
+import { Process } from "yao-node-client";
 
 export function Sub(a: number, b: number) {
   console.log(Process("utils.str.Concat", "test1213", "xxxx"));

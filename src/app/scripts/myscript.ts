@@ -1,4 +1,4 @@
-import { Process } from "@/yao-node-client";
+import { Process } from "yao-node-client";
 
 function main() {
   let res = Process("utils.str.Concat", "hello", new Date());
