@@ -148,16 +148,11 @@ function route(
   router[upath.method.toLowerCase()](
     upath.path,
     (req: Request, res: Response) => {
-      // return "heoll" + upath.description;
-
       let resp = null;
-      // let reqs = null;
-      // if (req.headers["content-type"] == "application/json") {
-      //   reqs = req.body;
-      // }
+
       let get = input(upath);
       const args = get({ req, res });
-      console.log("request arguments;\r\n", args);
+      // console.log("request arguments;\r\n", args);
       resp = Process(upath.process, ...args);
       const status = upath.out.status;
       const contentType = upath.out.type;
@@ -165,9 +160,20 @@ function route(
         res.setHeader("Content-Type", contentType);
       }
       if (upath.out.headers && Object.keys(upath.out.headers).length) {
-        for (const key in upath.out.headers) {
-          const element = upath.out.headers[key];
-          res.setHeader(key, element);
+        if (resp instanceof Object) {
+          let data = share.Dot(resp);
+          for (const name in upath.out.headers) {
+            const value = upath.out.headers[name];
+            let v = share.Bind(value, data);
+            if (v) {
+              res.setHeader(name, v);
+            }
+          }
+        } else {
+          for (const key in upath.out.headers) {
+            const element = upath.out.headers[key];
+            res.setHeader(key, element);
+          }
         }
       }
 
@@ -182,16 +188,22 @@ function route(
       if (!resp) {
         return;
       }
-
-      if (resp instanceof Object) {
-        res.json(resp);
+      let body = resp;
+      if (upath.out.body) {
+        if (body instanceof Object) {
+          let data = share.Dot(resp);
+          body = share.Bind(upath.out.body, data);
+        }
+      }
+      if (body instanceof Object) {
+        res.json(body);
       } else {
         if (contentType == "application/json") {
           res.status(status);
-          res.json(resp);
+          res.json(body);
         } else {
           res.status(status);
-          res.send(resp);
+          res.send(body);
         }
       }
     }

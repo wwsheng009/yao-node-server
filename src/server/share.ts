@@ -78,4 +78,6 @@ function ReadFile(filename: string): Buffer {
   return content;
 }
 
-export default { DirExists, ReadFile, SpecName, Walk };
+import { Bind, Dot } from "../utils/map";
+
+export default { DirExists, ReadFile, SpecName, Walk, Bind, Dot };
