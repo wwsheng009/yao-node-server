@@ -34,6 +34,18 @@ DEBUG=express:*
 
 - 不支持$session
 
+## api 拦截测试
+
+### 拦截 api
+
+使用覆盖 api 定义的方式拦截 api 请求，调用本地的脚本，可以在本地作调试
+
+复制远程 api 定义到本地目录，配置环境变量 LOCAL_APP_ROOT，默认目录是 src/app.相同的配置名本地会覆盖远程。启动 express 应用后可以拦截请求。
+
+### 拦截前端应用
+
+配置环境 YAO_APP_ROOT 指向 YAO 应用根目录，可以使用远程应用的 public 目录。在本地就可以使用本地地址直接访问前端应用资源。
+
 ## 调试
 
 使用了 nodemon，配置文件 nodemon.json,可以同时监控开发目录与 apis 目录
