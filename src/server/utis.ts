@@ -7,7 +7,7 @@ import path from "node:path";
 //     const content = share.readFile(filename);
 //     const result = gou.loadAPIReturn(content as string, name, "bearer-jwt");
 //     if (err != null) {
-//       log.error(err.message, { root, file: filename });
+//       log.Error(err.message, { root, file: filename });
 //       messages.push(`${name} ${err.message}`);
 //     }
 //   });

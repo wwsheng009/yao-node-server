@@ -35,7 +35,7 @@ function Walk(
   root = path.join(path.resolve(root), path.sep);
   walk(root, (filename: string, info: fs.Stats, err: Error) => {
     if (err) {
-      log.error(err.message, { root, type: typeName, filename });
+      log.Error(err.message, { root, type: typeName, filename });
       return err;
     }
     if (filename.endsWith(typeName)) {

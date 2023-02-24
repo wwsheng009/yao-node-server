@@ -1,4 +1,4 @@
 
-> yao-node-server@1.0.0 build /data/projects/yao/demos-v1.0/yao-node-projects/packages/yao-node-server
+> yao-node-server@1.0.2 build /data/projects/yao/demos-v1.0/yao-node-projects/packages/yao-node-server
 > rimraf dist && tsc && tsc-alias
 

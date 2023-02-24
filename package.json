@@ -1,9 +1,20 @@
 {
   "name": "yao-node-server",
-  "version": "1.0.0",
-  "description": "template project for yao-node-client/typescript development",
+  "version": "1.0.2",
+  "description": "A node proxy server for yao application development",
   "type": "commonjs",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wwsheng009/yao-node-server.git"
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ],
   "scripts": {
     "dev:node:comment": "使用配置文件nodemon.json",
     "start": "nodemon ./src/serve.ts",
@@ -11,7 +22,8 @@
     "run": "pnpm run build  && ts-node -r tsconfig-paths/register ./src/serve.ts",
     "build": "rimraf dist && tsc && tsc-alias",
     "build:watch": "concurrently --kill-others \"tsc -w\" \"tsc-alias -w\"",
-    "yao:rollup": "rimraf yao && rollup -c rollup.config.mjs"
+    "yao:rollup": "rimraf yao && rollup -c rollup.config.mjs",
+    "yao:build": "rimraf dist_esm && tsc -p ./tsconfig-yao.json && tsc-alias -p ./tsconfig-yao.json"
   },
   "keywords": [
     "yao",

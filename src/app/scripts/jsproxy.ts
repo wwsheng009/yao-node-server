@@ -56,10 +56,12 @@ export function Server(payload: {
         break;
       case "Query":
         const query = new Query();
+        //@ts-ignore
         resp.data = query[method](args);
         break;
       case "FileSystem":
         const fs = new FS(space);
+        //@ts-ignore
         resp.data = fs[method](...args);
         break;
       case "Store":
@@ -71,10 +73,11 @@ export function Server(payload: {
         }
         break;
       case "Http":
+        //@ts-ignore
         resp.data = http[method](...args);
         break;
       case "Log":
-        // console.log("Log args:", args);
+        //@ts-ignore
         log[method](...args);
         resp.data = {};
         break;

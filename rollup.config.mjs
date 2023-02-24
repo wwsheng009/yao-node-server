@@ -5,9 +5,6 @@ import commonjs from "@rollup/plugin-commonjs";
 import alias from "@rollup/plugin-alias";
 import json from "@rollup/plugin-json";
 
-import glob from "glob";
-import { fileURLToPath } from "node:url";
-
 const __dirname = path.resolve();
 
 // 命令行定义环境变量，在脚本中可以直接获取

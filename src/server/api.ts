@@ -45,7 +45,7 @@ function LoadHttpConfigFiles() {
 function LoadFrom(dir: string, prefix: string) {
   if (!share.DirExists(dir)) {
     let err = `Api config ${dir} does not exists`;
-    log.error(err);
+    log.Error(err);
     console.log(err);
     return;
   }
@@ -58,7 +58,7 @@ function LoadFrom(dir: string, prefix: string) {
     try {
       LoadAPI(content, name, prefix, "bearer-jwt");
     } catch (err) {
-      log.error(err.message);
+      log.Error(err.message);
       messages.push(`${name} ${err.message}`);
     }
   });
