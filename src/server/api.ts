@@ -1,7 +1,7 @@
-import { YaoApi } from "@/types/http";
+import { YaoApi } from "../types/http";
 import { log } from "yao-node-client";
 import share from "./share";
-import * as fs from "fs";
+import fs from "fs";
 import path from "node:path";
 
 import { Express } from "express";
@@ -49,6 +49,7 @@ function LoadFrom(dir: string, prefix: string) {
     console.log(err);
     return;
   }
+  console.log(`加载api文件：${dir}`);
 
   let messages: string[] = [];
   const err = share.Walk(dir, ".http.json", (root: string, fname: string) => {

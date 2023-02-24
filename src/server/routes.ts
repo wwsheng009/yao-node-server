@@ -1,11 +1,11 @@
-import { YaoApi } from "@/types/http";
+import { YaoApi } from "../types/http";
 import express, { Express, Request, Response, Router } from "express";
 import { UploadedFile } from "express-fileupload";
 import path from "path";
 import { Process } from "yao-node-client";
 import { URLToQueryParam } from "./query_param";
 import share from "./share";
-import * as fs from "fs";
+import fs from "fs";
 import os from "os";
 
 // Routes 配置转换为路由
@@ -44,7 +44,7 @@ function route(
 
       let get = input(upath);
       const args = get({ req, res });
-      // console.log("request arguments;\r\n", args);
+      console.log("request arguments;\r\n", args);
       resp = Process(upath.process, ...args);
       const status = upath.out.status;
       const contentType = upath.out.type;
@@ -78,11 +78,10 @@ function route(
         res.redirect(code, upath.out.redirect.location);
       }
       if (!resp) {
-        res.status(401);
         if (contentType == "application/json") {
-          res.json({ code: 401, message: "无返回值" });
+          res.status(401).json({ code: 401, message: "无返回值" });
         } else {
-          res.send("");
+          res.status(401).send("");
         }
 
         return;

@@ -1,6 +1,6 @@
 import path from "node:path";
 import { log } from "yao-node-client";
-import * as fs from "fs";
+import fs from "fs";
 
 // SpecName 解析名称  root: "/tests/apis"  file: "/tests/apis/foo/bar.http.json"
 function SpecName(root: string, file: string): string {

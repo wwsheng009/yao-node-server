@@ -1,20 +1,17 @@
 {
-  "name": "yao-node-template",
+  "name": "yao-node-server",
   "version": "1.0.0",
   "description": "template project for yao-node-client/typescript development",
   "type": "commonjs",
-  "main": "index.js",
+  "main": "src/index.ts",
   "scripts": {
-    "dev:node": "nodemon ./src/server/index.ts",
-    "dev": "nodemon --watch 'src/**/*.ts' --watch '../yao-node-app/apis/*.json' --exec 'ts-node' -r tsconfig-paths/register ./src/server/index.ts",
-    "run": "pnpm run build  && ts-node -r tsconfig-paths/register ./src/server/index.ts",
+    "dev:node:comment": "使用配置文件nodemon.json",
+    "start": "nodemon ./src/serve.ts",
+    "dev": "nodemon --watch 'src/**/*.ts' --watch '../yao-node-app/apis/*.json' --exec 'ts-node' -r tsconfig-paths/register ./src/serve.ts",
+    "run": "pnpm run build  && ts-node -r tsconfig-paths/register ./src/serve.ts",
     "build": "rimraf dist && tsc && tsc-alias",
     "build:watch": "concurrently --kill-others \"tsc -w\" \"tsc-alias -w\"",
-    "yao:build": "rimraf dist_esm && tsc -p ./tsconfig-yao.json && tsc-alias -p ./tsconfig-yao.json",
-    "yao:rollup": "rimraf yao && rollup -c rollup.config.mjs",
-    "yao:fixed": "ts-node -r tsconfig-paths/register src/tools/clean_up.ts",
-    "yao:pack": "pnpm run yao:rollup && pnpm run yao:fixed",
-    "start": "ts-node -r tsconfig-paths/register src/app/scripts/test/index.ts"
+    "yao:rollup": "rimraf yao && rollup -c rollup.config.mjs"
   },
   "keywords": [
     "yao",
