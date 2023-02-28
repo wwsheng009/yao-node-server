@@ -25,6 +25,14 @@ export function StartUp() {
 
   const port = parseInt(process.env.PORT);
 
+  //允许跨域
+  app.all("*", (_, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Content-Type");
+    res.header("Access-Control-Allow-Methods", "*");
+    next();
+  });
+
   ConfigApi(app, "/api");
 
   let pub = "public";
