@@ -1,4 +1,5 @@
-import { QueryParam, QueryWhere } from "yao-node-client";
+import { YaoQueryParam } from "yao-app-ts-types";
+
 
 // getURLValue 读取URLvalues 数值 return []string | string
 function getURLValue(
@@ -15,7 +16,7 @@ function getURLValue(
 }
 
 // "select", "name,secret,status,type" -> []interface{"name","secret"...}
-function setSelect(param: QueryParam, value: string) {
+function setSelect(param: YaoQueryParam.QueryParam, value: string) {
   const selects: (string | any)[] = [];
   const colmns = value.split(",");
   for (const column of colmns) {
@@ -26,7 +27,7 @@ function setSelect(param: QueryParam, value: string) {
 
 // "group.types.where.type.eq", "admin"
 function setGroupWhere(
-  groups: { [key: string]: QueryWhere[] },
+  groups: { [key: string]: YaoQueryParam.QueryWhere[] },
   name: string,
   value: any
 ) {
@@ -44,7 +45,7 @@ function setGroupWhere(
   }
   const op = matches[4];
 
-  const where: QueryWhere = {
+  const where: YaoQueryParam.QueryWhere = {
     method,
     op,
     column,
@@ -58,7 +59,7 @@ function setGroupWhere(
 }
 
 // "where.status.eq" , "enabled" -> []Wheres{...}
-function setWhere(param: QueryParam, name: string, value: any) {
+function setWhere(param: YaoQueryParam.QueryParam, name: string, value: any) {
   const matches = name.match(/^(where|orwhere|wherein|orwherein)\.(.+)\.eq$/);
   const method = matches[1];
   const colinfo = matches[2].split(".");
@@ -69,7 +70,7 @@ function setWhere(param: QueryParam, name: string, value: any) {
     rel = colinfo.slice(0, length - 1).join(".");
   }
   const op = matches[3];
-  const where: QueryWhere = {
+  const where: YaoQueryParam.QueryWhere = {
     method,
     op,
     column,
@@ -80,7 +81,7 @@ function setWhere(param: QueryParam, name: string, value: any) {
 }
 
 // "order.id" , "desc"
-function setOrder(param: QueryParam, name: string, value: string) {
+function setOrder(param: YaoQueryParam.QueryParam, name: string, value: string) {
   const orders = value.split(",");
   for (const order of orders) {
     let column = order;
@@ -101,7 +102,7 @@ function setOrder(param: QueryParam, name: string, value: string) {
   }
 }
 // "with", "mother,addresses" -> map[string]With
-function setWith(param: QueryParam, value: string) {
+function setWith(param: YaoQueryParam.QueryParam, value: string) {
   const withs = value.split(",");
   for (const withx in withs) {
     const name = withx.trim();
@@ -114,7 +115,7 @@ function setWith(param: QueryParam, value: string) {
   }
 }
 // "mother.select", "name,mobile,type,status" -> map[string]With
-function setWithSelect(param: QueryParam, name: string, value: string) {
+function setWithSelect(param: YaoQueryParam.QueryParam, name: string, value: string) {
   const namer = name.split(".");
   const withName = namer[0];
   if (!param.withs[withName]) {
@@ -132,12 +133,12 @@ function setWithSelect(param: QueryParam, name: string, value: string) {
 }
 
 // URLToQueryParam url.Values 转换为 QueryParams
-export function URLToQueryParam(values: { [key: string]: string }): QueryParam {
-  const param: QueryParam = {
+export function URLToQueryParam(values: { [key: string]: string }): YaoQueryParam.QueryParam {
+  const param: YaoQueryParam.QueryParam = {
     withs: {},
     wheres: [],
   };
-  const whereGroups: { [key: string]: QueryWhere[] } = {};
+  const whereGroups: { [key: string]: YaoQueryParam.QueryWhere[] } = {};
   for (const name in values) {
     if (name === "select") {
       setSelect(param, values[name]);
