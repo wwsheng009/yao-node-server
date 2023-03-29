@@ -42,14 +42,15 @@ function LoadHttpConfigFiles() {
 
 // Setup();
 // LoadFrom 从特定目录加载
-function LoadFrom(dir: string, prefix: string) {
+function LoadFrom(dirp: string, prefix: string) {
+  const dir = path.resolve(dirp);
   if (!share.DirExists(dir)) {
     let err = `Api config ${dir} does not exists`;
     log.Error(err);
     console.log(err);
     return;
   }
-  console.log(`加载api文件：${dir}`);
+  console.log(`从目录：${dir}加载api文件`);
 
   let messages: string[] = [];
   const err = share.Walk(dir, ".http.json", (root: string, fname: string) => {

@@ -1,23 +1,4 @@
-## api 测试服务器
-
-环境搭建
-
-```sh
-pnpm i express dotenv
-pnpm i -D @types/express
-pnpm i -D typescript @types/node
-pnpm i express-fileupload
-```
-
-### 调试
-
-如果需要调试 express 的路由，需要配置环境变量 DEBUG
-
-```sh
-DEBUG=express:*
-```
-
-## 功能
+# 功能
 
 此 api 服务器主要目的是用来测试 yao js 脚本。方便测试编写 ts 脚本功能。
 
@@ -34,13 +15,28 @@ DEBUG=express:*
 
 - 不支持$session
 
-## api 拦截测试
+## 环境搭建
+
+```sh
+pnpm i express dotenv
+pnpm i -D @types/express
+pnpm i -D typescript @types/node
+pnpm i express-fileupload
+```
+
+### 调试
+
+如果需要调试 express 的路由，需要配置环境变量 DEBUG
+
+```sh
+DEBUG=express:*
+```
 
 ### 拦截 api
 
 使用覆盖 api 定义的方式拦截 api 请求，调用本地的脚本，可以在本地作调试
 
-复制远程 api 定义到本地目录，配置环境变量 LOCAL_APP_ROOT，默认目录是 src/app.相同的配置名本地会覆盖远程。启动 express 应用后可以拦截请求。
+复制远程 api 定义到本地目录，配置环境变量 LOCAL_API_FOLDER，默认目录是 src/app.相同的配置名本地会覆盖远程。启动 express 应用后可以拦截请求。
 
 ### 拦截前端应用
 
