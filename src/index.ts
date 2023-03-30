@@ -1,2 +1,1 @@
-import { StartUp } from "./server";
-export default StartUp;
+export * from "./server";

@@ -1,6 +1,6 @@
 {
   "name": "yao-node-server",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A node proxy server for yao application development",
   "type": "commonjs",
   "main": "dist/index.js",
@@ -17,7 +17,7 @@
   ],
   "scripts": {
     "dev:node:comment": "使用配置文件nodemon.json",
-    "start": "nodemon ./src/serve.ts",
+    "start": "nodemon ./tests/start.ts",
     "dev": "nodemon --watch 'src/**/*.ts' --watch '../yao-node-app/apis/*.json' --exec 'ts-node' -r tsconfig-paths/register ./src/serve.ts",
     "run": "pnpm run build  && ts-node -r tsconfig-paths/register ./src/serve.ts",
     "build": "rimraf dist && tsc && tsc-alias",

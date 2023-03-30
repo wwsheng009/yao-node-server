@@ -23,7 +23,7 @@ export function StartUp() {
     })
   );
 
-  const port = parseInt(process.env.PORT);
+  const port = parseInt(process.env.NODE_PORT);
 
   //允许跨域
   app.all("*", (_, res, next) => {
