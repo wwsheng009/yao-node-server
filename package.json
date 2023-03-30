@@ -1,6 +1,6 @@
 {
   "name": "yao-node-server",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A node proxy server for yao application development",
   "type": "commonjs",
   "main": "dist/index.js",
