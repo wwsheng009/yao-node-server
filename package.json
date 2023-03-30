@@ -1,6 +1,6 @@
 {
   "name": "yao-node-server",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A node proxy server for yao application development",
   "type": "commonjs",
   "main": "dist/index.js",
@@ -23,7 +23,8 @@
     "build": "rimraf dist && tsc && tsc-alias",
     "build:watch": "concurrently --kill-others \"tsc -w\" \"tsc-alias -w\"",
     "yao:rollup": "rimraf yao && rollup -c rollup.config.mjs",
-    "yao:build": "rimraf dist_esm && tsc -p ./tsconfig-yao.json && tsc-alias -p ./tsconfig-yao.json"
+    "yao:build": "rimraf dist_esm && tsc -p ./tsconfig-yao.json && tsc-alias -p ./tsconfig-yao.json",
+    "npm:publish": "npm run build && npm pack && npm publish"
   },
   "keywords": [
     "yao",
