@@ -10,7 +10,7 @@ import fs from "fs";
 
 import listEndpoints from "express-list-endpoints";
 
-export function StartUp() {
+export function startup() {
   const app: Express = express();
 
   app.use(express.json());

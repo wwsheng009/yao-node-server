@@ -1,2 +1,2 @@
-import { StartUp } from "../src";
-StartUp();
+import { startup } from "../src";
+startup();
